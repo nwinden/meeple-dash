@@ -1,0 +1,53 @@
+<section ng-init="getCollection()">
+
+  <h2>Dashboard</h2>
+
+
+  <table st-table="games" st-safe-src="boardgames">
+  	<thead>
+    <tr>
+  		<th colspan="4"><input st-search="" placeholder="Search Collection" type="text"/></th>
+      <th colspan="3">
+        <label for="filter">Lent Games Filter: </label>
+        <select name="filter" ng-model="filterBy">
+          <option value="">None</option>
+          <option value="false">Not Lent out</option>
+          <option value="true">Lent Out</option>
+        </select>
+    </th>
+    </tr>
+  	<tr>
+  		<th>Image</th>
+  		<th st-sort="gamename" >Game</th>
+  		<th st-sort="minplayers" >Min Players</th>
+  		<th st-sort="maxplayers" >Max Players</th>
+  		<th st-sort="minplaytime" >Min Time(hours)</th>
+      <th st-sort="maxplaytime" >Max Time(hours)</th>
+      <th></th>
+  	</tr>
+  	</thead>
+    <tbody ng-if="boardgames.length == 0">
+      <tr>
+        <td colspan="7">Find some games for your Collection!</td>
+      </tr>
+    </tbody>
+  	<tbody ng-repeat="boardgame in games | filter : boardgame.is_lent = filterBy">
+      <tr ng-if="boardgame.is_lent">
+        <td><img ng-src={{boardgame.thumbnail}} /></td>
+        <td>{{boardgame.gamename}}</td>
+        <td colspan="4">This Game is Lent Out</td>
+        <td><button ng-click="returnGame(boardgame)">Return Game</button><button ng-click="deleteGame(boardgame.api_id)">Remove</button></td>
+      </tr>
+      <tr ng-if="!boardgame.is_lent" >
+  		  <td><img ng-src={{boardgame.thumbnail}} /></td>
+    		<td>{{boardgame.gamename}}</td>
+    		<td>{{boardgame.minplayers}}</td>
+    		<td>{{boardgame.maxplayers}}</td>
+    		<td>{{boardgame.minplaytime}}</td>
+        <td>{{boardgame.maxplaytime}}</td>
+        <td><button ng-click="lendGame(boardgame)">Lend Game</button><button ng-click="deleteGame(boardgame.api_id)">Remove</button></td>
+  	  </tr>
+  	</tbody>
+  </table>
+
+</section>

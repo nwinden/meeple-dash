@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  <head lang="en">
+
+    <meta charset="UTF-8">
+    <title>Meeple Dash</title>
+
+    <link rel="stylesheet" href="/styles/stylesheet.css" />
+    <script type="text/javascript" src="/assets/vendors/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/smart-table.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-route.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/xml2json.min.js"></script>
+    <script type="text/javascript" src="/assets/objects/boardgame.js"></script>
+    <script type="text/javascript" src="/scripts/boardApp.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/collectionController.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/wishlistController.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/searchController.js"></script>
+
+
+  </head>
+
+  <body ng-app="boardApp">
+
+    <header ng-include="'/views/templates/header.html'"></header>
+
+    <section ng-include="'/views/templates/nav.html'"></section>
+
+    <main ng-view>
+
+    </main>
+
+    <footer ng-include="'/views/templates/footer.html'"></footer>
+
+  </body>
+
+</html>

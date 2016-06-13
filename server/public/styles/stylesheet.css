@@ -1,0 +1,97 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  background-color: royalblue;
+  margin-left: -8px;
+  margin-right: -8px;
+  margin-top: -8px;
+  height: 75px;
+  padding-top: 25px;
+  color: white;
+}
+
+.navbar {
+  width: 425px;
+  margin: auto;
+  border-bottom: 3px solid royalblue;
+  padding-bottom: 5px;
+}
+
+.nav {
+  width: auto;
+  display: inline-block;
+
+}
+
+.nav a {
+  text-decoration: none;
+  color: royalblue;
+  margin:10px;
+  border-left: 2px solid royalblue;
+  padding-left: 20px;
+  padding-bottom: 15px;
+}
+
+.nav a:hover {
+  color: lawngreen;
+}
+
+.nav a:active {
+  color: orangered;
+}
+
+main {
+  text-align: center;
+}
+
+h6 {
+  text-align: center;
+}
+
+.pet p {
+  display: inline-block;
+}
+
+.favorite p {
+  display: block;
+}
+
+.collection, .searchedGame {
+  margin: 10px auto;
+  border: 3px solid royalblue;
+  padding: 10px;
+  height: auto;
+  width: 600px;
+  box-shadow: 3px 3px 5px 1px black;
+}
+
+table th, table td {
+  border-bottom: 1px solid #ddd;
+  padding: 0 20px;
+}
+
+table th {
+  height: 50px;
+  width: 200px;
+}
+
+table td {
+  height: 175px;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 5px;
+  width: auto;
+  margin: auto;
+}
+
+/*table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}*/
