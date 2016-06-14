@@ -34,10 +34,11 @@
   -ms-box-shadow: 4px 4px 80px #000;
   -o-box-shadow: 4px 4px 80px #000;
   padding: 10px;
+  border-radius: 3px;
 }
 .ng-modal-dialog-content {
   overflow: scroll;
-  height: 500px;
+  height: 600px;
 }
 .ng-modal-close {
   position: absolute;
@@ -54,7 +55,7 @@
 }
 .ng-modal-title {
   font-weight: bold;
-  font-size: 200%;
+  font-size: 150%;
   display: block;
   margin-bottom: 10px;
   padding-bottom: 7px;

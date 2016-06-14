@@ -47,4 +47,11 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   }
 
+  $scope.myData = { modalShown: false };
+
+  $scope.toggleInfo = function(game) {
+    $scope.myData.modalShown = !$scope.myData.modalShown;
+    $scope.modalGame = game;
+  };
+
 }]);

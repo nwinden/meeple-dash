@@ -23,7 +23,7 @@
       </tr>
     </tbody>
     <tbody ng-repeat="boardgame in games">
-      <tr>
+      <tr ng-click="toggleInfo(boardgame)">
         <td><img ng-src={{boardgame.thumbnail}} /></td>
         <td>{{boardgame.gamename}}</td>
         <td>{{boardgame.minplayers}}</td>
@@ -40,3 +40,13 @@
   </table>
 
 </section>
+
+<modal-dialog show='myData.modalShown' width='800px' dialog-title={{modalGame.gamename}}>
+  <img ng-src="{{modalGame.image}}"/>
+  <p>Year Published: {{modalGame.yearpublished}}</p>
+  <p>Publisher(s):</p>
+  <p ng-repeat="designer in modalGame.designers">{{designer}}</p>
+  <p>Categories:</p>
+  <p ng-repeat="category in modalGame.categories">{{category}}</p>
+  <p>{{modalGame.description}}</p>
+</modal-dialog>
