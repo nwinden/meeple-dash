@@ -1,4 +1,4 @@
-var boardApp = angular.module('boardApp', ['ngRoute', 'smart-table']);
+var boardApp = angular.module('boardApp', ['ngRoute', 'smart-table', 'ngModal']);
 
 //Routes for the site views
 boardApp.config(['$routeProvider', function($routeProvider) {

@@ -3,6 +3,7 @@ boardApp.controller('CollectionController', ['$scope', '$http', '$filter', funct
   console.log('Hey Buckaroo!');
 
   $scope.boardgames = [];
+  $scope.modalGame = {};
 
   $scope.getCollection = function() {
 
@@ -63,5 +64,12 @@ boardApp.controller('CollectionController', ['$scope', '$http', '$filter', funct
     );
 
   }
+
+  $scope.myData = { modalShown: false };
+
+  $scope.toggleInfo = function(game) {
+    $scope.myData.modalShown = !$scope.myData.modalShown;
+    $scope.modalGame = game;
+  };
 
 }]);
