@@ -31,28 +31,30 @@
       </tr>
     </tbody>
   	<tbody ng-repeat="boardgame in games | filter : boardgame.is_lent = filterBy">
-      <tr ng-if="boardgame.is_lent" ng-click="toggleInfo(boardgame)">
-        <td><img ng-src={{boardgame.thumbnail}} /></td>
+      <tr ng-if="boardgame.is_lent">
+        <td><img ng-src={{boardgame.thumbnail}} ng-click="toggleInfo(boardgame)" /></td>
         <td>{{boardgame.gamename}}</td>
         <td colspan="4">This Game is Lent Out</td>
         <td><button ng-click="returnGame(boardgame)">Return Game</button><button ng-click="deleteGame(boardgame.api_id)">Remove</button></td>
       </tr>
-      <tr ng-if="!boardgame.is_lent" ng-click="toggleModal(boardgame)">
-  		  <td><img ng-src={{boardgame.thumbnail}} /></td>
+      <tr ng-if="!boardgame.is_lent">
+  		  <td><img ng-src={{boardgame.thumbnail}} ng-click="toggleInfo(boardgame)" /></td>
     		<td>{{boardgame.gamename}}</td>
     		<td>{{boardgame.minplayers}}</td>
     		<td>{{boardgame.maxplayers}}</td>
     		<td>{{boardgame.minplaytime}}</td>
         <td>{{boardgame.maxplaytime}}</td>
-        <td><button ng-click="lendGame(boardgame)">Lend Game</button><button ng-click="deleteGame(boardgame.api_id)">Remove</button></td>
-
+        <td>
+          <button ng-click="lendGame(boardgame)">Lend Game</button>
+          <button ng-click="deleteGame(boardgame.api_id)">Remove</button>
+        </td>
   	  </tr>
   	</tbody>
   </table>
 
 </section>
 
-<modal-dialog show='myData.modalShown' width='1000px' dialog-title={{modalGame.gamename}}>
+<modal-dialog show='myData.modalShown' width='800px' dialog-title={{modalGame.gamename}}>
   <img ng-src="{{modalGame.image}}"/>
   <p>Year Published: {{modalGame.yearpublished}}</p>
   <p>Publisher(s):</p>
@@ -60,5 +62,4 @@
   <p>Categories:</p>
   <p ng-repeat="category in modalGame.categories">{{category}}</p>
   <p>{{modalGame.description}}</p>
-
 </modal-dialog>

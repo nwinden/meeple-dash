@@ -23,19 +23,18 @@
       </tr>
     </tbody>
     <tbody ng-repeat="boardgame in games">
-      <tr ng-click="toggleInfo(boardgame)">
-        <td><img ng-src={{boardgame.thumbnail}} /></td>
+      <tr>
+        <td><img ng-src={{boardgame.thumbnail}} ng-click="toggleInfo(boardgame)" /></td>
         <td>{{boardgame.gamename}}</td>
         <td>{{boardgame.minplayers}}</td>
         <td>{{boardgame.maxplayers}}</td>
         <td>{{boardgame.minplaytime}}</td>
         <td>{{boardgame.maxplaytime}}</td>
-      <td>
-        <button ng-click="addToCollection(boardgame)">Add to Collection</button>
-        <button ng-click="deleteGame(boardgame.api_id)">Remove</button>
-      </td>
+        <td>
+          <button ng-click="addToCollection(boardgame)">Add to Collection</button>
+          <button ng-click="deleteGame(boardgame.api_id)">Remove</button>
+        </td>
       </tr>
-    </div>
     </tbody>
   </table>
 
