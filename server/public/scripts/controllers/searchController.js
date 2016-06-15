@@ -17,8 +17,6 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
     $http.get('/search/search-api/' + search).then(
       function(response) {
 
-        console.log(response.data);
-
         if(!turnXML(response.data).boardgames.boardgame){
 
           $scope.modal.resultsText= 'That query returned no results,\nplease try again!';

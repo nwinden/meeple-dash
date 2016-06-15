@@ -112,7 +112,7 @@ function Boardgame(game) {
 
   }
 
-  this.image = game.image ? 'http:' + game.image : '/assets/images/image_not_avaliable.png';
+  this.image = game.image ? 'http:' + game.image : '/assets/images/img_not_available.png';
 
   this.isLent = false;
 
