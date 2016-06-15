@@ -56,15 +56,14 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
   $scope.addToCollection = function(game) {
 
     $scope.modal.collection = !$scope.modal.collection;
-    $scope.modal.addedGame = game
-
-    game.location = 'collection';
-
+    $scope.modal.addedGame = game;
+    
   }
 
   $scope.toCollection = function () {
 
     $scope.modal.collection = !$scope.modal.collection;
+    $scope.modal.addedGame.location = 'collection';
 
     $http.post('/wishlist', $scope.modal.addedGame).then(
       function(response) {
