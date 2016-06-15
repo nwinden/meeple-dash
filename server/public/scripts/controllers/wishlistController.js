@@ -5,8 +5,8 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
   $scope.boardgames = [];
 
   $scope.modal = {info:false,
+                  modalGame:{},
                   delete:false,
-                  deleteID:'',
                   collection:false,
                   addedGame:{},
                   success:false,
@@ -26,10 +26,10 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
   }
 
 
-  $scope.deleteGame = function(id) {
+  $scope.deleteGame = function(game) {
 
+    $scope.modal.modalGame = game;
     $scope.modal.delete = !$scope.modal.delete;
-    $scope.modal.deleteID = id;
 
   }
 
@@ -37,7 +37,7 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
     $scope.modal.delete = !$scope.modal.delete;
 
-    $http.delete('/wishlist/' + $scope.modal.deleteID).then(
+    $http.delete('/wishlist/' + $scope.modal.modalGame.api_id).then(
       function(response) {
 
         $scope.getWishlist();
@@ -55,21 +55,21 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   $scope.addToCollection = function(game) {
 
+    $scope.modal.modalGame = game;
     $scope.modal.collection = !$scope.modal.collection;
-    $scope.modal.addedGame = game;
-    
+
   }
 
   $scope.toCollection = function () {
 
     $scope.modal.collection = !$scope.modal.collection;
-    $scope.modal.addedGame.location = 'collection';
+    $scope.modal.modalGame.location = 'collection';
 
-    $http.post('/wishlist', $scope.modal.addedGame).then(
+    $http.post('/wishlist', $scope.modal.modalGame).then(
       function(response) {
 
         if (response.status == 200) {
-          $scope.modal.successText= 'successfully added ' + response.config.data.gamename + ' to your collection.'
+          $scope.modal.successText= 'successfully added to your collection.';
           $scope.modal.success = !$scope.modal.success;
         }
 
@@ -82,8 +82,9 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
   }
 
   $scope.toggleInfo = function(game) {
+
+    $scope.modal.modalGame = game;
     $scope.modal.info = !$scope.modal.info;
-    $scope.modalGame = game;
   };
 
 }]);

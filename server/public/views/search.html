@@ -49,37 +49,38 @@
 
 </section>
 
-<modal-dialog show='modal.info' width='800px' dialog-title={{modalGame.name}}>
-  <img ng-src="{{modalGame.image}}"/>
-  <p>Suggested Age: {{modalGame.suggestedAge}}</p>
-  <p>Year Published: {{modalGame.yearPublished}}</p>
+<modal-dialog show='modal.info' width='800px' dialog-title={{modal.modalGame.name}}>
+  <img ng-src="{{modal.modalGame.image}}"/>
+  <p>Suggested Age: {{modal.modalGame.suggestedAge}}</p>
+  <p>Year Published: {{modal.modalGame.yearPublished}}</p>
   <p>Designer(s):</p>
-  <p ng-repeat="designer in modalGame.designers">{{designer}}</p>
+  <p ng-repeat="designer in modal.modalGame.designers">{{designer}}</p>
   <p>Categories:</p>
-  <p ng-repeat="category in modalGame.categories">{{category}}</p>
-  <p>{{modalGame.description}}</p>
+  <p ng-repeat="category in modal.modalGame.categories">{{category}}</p>
+  <p>{{modal.modalGame.description}}</p>
 </modal-dialog>
 
-<modal-dialog show='modal.collection' width='300px' height='100px'>
+<modal-dialog show='modal.collection' width='310px' height='150px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>Are you sure you wish to add this game to your collection?</p>
   <button ng-click='toCollection()'>Yes</button>
   <button ng-click='modal.collection = false'>No</button>
 </modal-dialog>
 
-<modal-dialog show='modal.wishlist' width='300px' height='100px'>
+<modal-dialog show='modal.wishlist' width='310px' height='150px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>Are you sure you wish to add this game to your wish list?</p>
   <button ng-click='toWishList()'>Yes</button>
   <button ng-click='modal.wishlist = false'>No</button>
 </modal-dialog>
 
-<modal-dialog show='modal.duplicate' width='350px' height='75px'>
+<modal-dialog show='modal.duplicate' width='350px' height='100px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>{{modal.duplicateText}}</p>
 </modal-dialog>
 
-<modal-dialog show='modal.added' width='300px' height='75px'>
+<modal-dialog show='modal.added' width='310px' height='100px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>{{modal.addedText}}</p>
 </modal-dialog>
 
 <modal-dialog show='modal.results' width='300px' height='75px'>
-  <p>{{modal.resultsText}}</p>
+  <p>That query returned no results,</p>
+  <p>please try again!</p>
 </modal-dialog>

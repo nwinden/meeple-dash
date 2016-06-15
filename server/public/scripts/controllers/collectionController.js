@@ -3,7 +3,13 @@ boardApp.controller('CollectionController', ['$scope', '$http', '$filter', funct
   console.log('Hey Buckaroo!');
 
   $scope.boardgames = [];
-  $scope.modalGame = {};
+
+  $scope.modal = {info:false,
+                  modalGame:{},
+                  delete:false,
+                  lend:false,
+                  success:false,
+                  successText:''};
 
   $scope.getCollection = function() {
 
@@ -20,12 +26,26 @@ boardApp.controller('CollectionController', ['$scope', '$http', '$filter', funct
 
   }
 
-  $scope.deleteGame = function(id) {
+  $scope.deleteGame = function(game) {
 
-    $http.delete('/collection/' + id).then(
+    $scope.modal.modalGame = game;
+    $scope.modal.delete = !$scope.modal.delete;
+
+  }
+
+  $scope.delete = function () {
+
+    $scope.modal.delete = !$scope.modal.delete;
+
+    $http.delete('/collection/' + $scope.modal.modalGame.api_id).then(
       function(response) {
 
         $scope.getCollection();
+
+        if (response.status == 200) {
+          $scope.modal.successText= 'successfully deleted from your collection.'
+          $scope.modal.success = !$scope.modal.success;
+        }
 
       }
 
@@ -65,11 +85,11 @@ boardApp.controller('CollectionController', ['$scope', '$http', '$filter', funct
 
   }
 
-  $scope.myData = { modalShown: false };
-
   $scope.toggleInfo = function(game) {
-    $scope.myData.modalShown = !$scope.myData.modalShown;
-    $scope.modalGame = game;
+
+    $scope.modal.modalGame = game;
+    $scope.modal.info = !$scope.modal.info;
+
   };
 
 }]);

@@ -5,15 +5,14 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
   $scope.boardgames = [];
 
   $scope.modal = {info: false,
+                  modalGame:{},
                   collection:false,
                   wishlist:false,
-                  addedGame:{},
                   duplicate: false,
                   dublicateText: '',
                   results: false,
-                  resultsText: '',
                   added: false,
-                  addedText: ''};
+                  addedText:''};
 
   $scope.searchAPI = function(search) {
 
@@ -22,7 +21,6 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
         if(!turnXML(response.data).boardgames.boardgame){
 
-          $scope.modal.resultsText= 'That query returned no results,\nplease try again!';
           $scope.modal.results = !$scope.modal.results;
 
         } else {
@@ -73,8 +71,8 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   $scope.addToCollection = function(game) {
 
+    $scope.modal.modalGame = game;
     $scope.modal.collection = !$scope.modal.collection;
-    $scope.modal.addedGame = game;
 
   }
 
@@ -82,17 +80,17 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
     $scope.modal.collection = !$scope.modal.collection;
 
-    $scope.modal.addedGame.dbstored = 'collection';
+    $scope.modal.modalGame.dbstored = 'collection';
 
-    $http.post('/search/to-collection', $scope.modal.addedGame).then(function(response) {
+    $http.post('/search/to-collection', $scope.modal.modalGame).then(function(response) {
 
       console.log(response);
 
       if (response.status == 200) {
-        $scope.modal.duplicateText = 'You already have that game in your ' + response.data[0].location + '!';
+        $scope.modal.duplicateText = 'You already have this game in your ' + response.data[0].location + '!';
         $scope.modal.duplicate = !$scope.modal.duplicate;
       } else if (response.status == 201) {
-        $scope.modal.addedText = 'Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.';
+        $scope.modal.addedText = 'Succesfully added to your ' + response.config.data.dbstored + '.';
         $scope.modal.added = !$scope.modal.added;
       }
 
@@ -101,8 +99,8 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   $scope.addToWishList = function(game) {
 
+    $scope.modal.modalGame = game;
     $scope.modal.wishlist = !$scope.modal.wishlist;
-    $scope.modal.addedGame = game;
 
   }
 
@@ -110,15 +108,15 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
     $scope.modal.wishlist = !$scope.modal.wishlist;
 
-    $scope.modal.addedGame.dbstored = 'wish list';
+    $scope.modal.modalGame.dbstored = 'wish list';
 
-    $http.post('/search/to-wish-list', $scope.modal.addedGame).then(function(response) {
+    $http.post('/search/to-wish-list', $scope.modal.modalGame).then(function(response) {
 
       if (response.status == 200) {
-        $scope.modal.duplicateText = 'You already have that game in your ' + response.data[0].location + '!';
+        $scope.modal.duplicateText = 'You already have this game in your ' + response.data[0].location + '!';
         $scope.modal.duplicate = !$scope.modal.duplicate;
       } else if (response.status == 201) {
-        $scope.modal.addedText = 'Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.';
+        $scope.modal.addedText = 'Succesfully added to your ' + response.config.data.dbstored + '.';
         $scope.modal.added = !$scope.modal.added;
       }
 
@@ -126,8 +124,10 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
   }
 
   $scope.toggleInfo = function(game) {
+
+    $scope.modal.modalGame = game;
     $scope.modal.info = !$scope.modal.info;
-    $scope.modalGame = game;
+
   };
 
 }]);
