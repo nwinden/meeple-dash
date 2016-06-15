@@ -41,12 +41,12 @@ router.post('/', function(req, res) {
 
       client.query( 'INSERT INTO dash_collection (api_id, categories, description, designers, image, is_lent,'
                     + ' maxplayers, maxplaytime, minplayers, minplaytime, '
-                    + 'gamename, suggested_age, thumbnail, yearpublished)' +
-                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
+                    + 'gamename, suggested_age, thumbnail, yearpublished, publishers)' +
+                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)',
                     [game.api_id, game.categories, game.description, game.designers, game.image, game.is_lent, game.maxplayers,
                     game.maxplaytime, game.minplayers, game.minplaytime,
                     game.gamename, game.suggested_age, game.thumbnail,
-                    game.yearpublished],
+                    game.yearpublished, game.publishers],
                     function(err, result) {
 
                       if (err) {
