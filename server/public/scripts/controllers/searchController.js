@@ -4,14 +4,25 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   $scope.boardgames = [];
 
+  $scope.modal = { info: false,
+                  duplicate: false,
+                  dublicateText: '',
+                  results: false,
+                  resultsText: '',
+                  added: false,
+                  addedText: ''};
+
   $scope.searchAPI = function(search) {
 
     $http.get('/search/search-api/' + search).then(
       function(response) {
 
+        console.log(response.data);
+
         if(!turnXML(response.data).boardgames.boardgame){
 
-          alert('That query returned no results,\nplease try again!');
+          $scope.modal.resultsText= 'That query returned no results,\nplease try again!';
+          $scope.modal.results = !$scope.modal.results;
 
         } else {
 
@@ -34,6 +45,8 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
             function(response) {
 
               games = Array.isArray(turnXML(response.data).boardgames.boardgame) ? turnXML(response.data).boardgames.boardgame : [turnXML(response.data).boardgames.boardgame];
+
+              console.log(turnXML(response.data).boardgames.boardgame);
 
               for (var i = 0; i < games.length; i++) {
 
@@ -66,9 +79,11 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
       console.log(response);
 
       if (response.status == 200) {
-        alert('You already have that game in your ' + response.data[0].location + '!');
+        $scope.modal.duplicateText = 'You already have that game in your ' + response.data[0].location + '!';
+        $scope.modal.duplicate = !$scope.modal.duplicate;
       } else if (response.status == 201) {
-        alert('Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.');
+        $scope.modal.addedText = 'Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.';
+        $scope.modal.added = !$scope.modal.added;
       }
 
     });
@@ -82,21 +97,21 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
     $http.post('/search/to-wish-list', game).then(function(response) {
 
       if (response.status == 200) {
-        alert('You already have that game in your ' + response.data[0].location + '!');
+        $scope.modal.duplicateText = 'You already have that game in your ' + response.data[0].location + '!';
+        $scope.modal.duplicate = !$scope.modal.duplicate;
       } else if (response.status == 201) {
-        alert('Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.');
+        $scope.modal.addedText = 'Succesfully added ' + response.config.data.name + ' to your ' + response.config.data.dbstored + '.';
+        $scope.modal.added = !$scope.modal.added;
       }
 
     });
 
   }
 
-  $scope.myData = { modalShown: false };
-
-  $scope.toggleInfo = function(game) {
-    $scope.myData.modalShown = !$scope.myData.modalShown;
-    $scope.modalGame = game;
-  };
+$scope.toggleInfo = function(game) {
+  $scope.modal.info = !$scope.modal.info;
+  $scope.modalGame = game;
+};
 
 }]);
 

@@ -49,12 +49,25 @@
 
 </section>
 
-<modal-dialog show='myData.modalShown' width='800px' dialog-title={{modalGame.name}}>
+<modal-dialog show='modal.info' width='800px' dialog-title={{modalGame.name}}>
   <img ng-src="{{modalGame.image}}"/>
-  <p>Year Published: {{modalGame.yearpPublished}}</p>
+  <p>Year Published: {{modalGame.yearPublished}}</p>
+  <p>Suggested Age: {{modalGame.suggestedAge}}</p>
   <p>Designer(s):</p>
-  <p ng-repeat="designer in modalGame.designer">{{designer}}</p>
+  <p ng-repeat="designer in modalGame.designers">{{designer}}</p>
   <p>Categories:</p>
-  <p ng-repeat="category in modalGame.category">{{category}}</p>
+  <p ng-repeat="category in modalGame.categories">{{category}}</p>
   <p>{{modalGame.description}}</p>
+</modal-dialog>
+
+<modal-dialog show='modal.duplicate' width='300px' height='100px' dialog-title={{modalGame.name}}>
+  <p>{{modal.duplicateText}}</p>
+</modal-dialog>
+
+<modal-dialog show='modal.added' width='300px' height='100px' dialog-title={{modalGame.name}}>
+  <p>{{modal.addedText}}</p>
+</modal-dialog>
+
+<modal-dialog show='modal.results' width='300px' height='100px' dialog-title={{modalGame.name}}>
+  <p>{{modal.resultsText}}</p>
 </modal-dialog>
