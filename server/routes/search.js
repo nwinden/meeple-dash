@@ -18,7 +18,7 @@ router.get('/search-api/:search', function (req, res) {
     }
 
     res.send(games);
-    
+
   });
 
 });
@@ -68,14 +68,14 @@ router.post('/to-collection', function(req, res) {
                                         res.sendStatus(500);
                                       }
 
-                                      client.query( 'INSERT INTO dash_collection (api_id, categories, description, designers, image, is_lent,'
+                                      client.query( 'INSERT INTO dash_collection (api_id, categories, description, designers, image,    is_lent,'
                                                     + ' maxplayers, maxplaytime, minplayers, minplaytime, '
-                                                    + 'gamename, suggested_age, thumbnail, yearpublished)' +
-                                                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
-                                                    [game.apiID, game.category, game.description, game.designer, game.image, game.isLent, game.maxPlayers,
+                                                    + 'gamename, suggested_age, thumbnail, yearpublished, publishers)' +
+                                                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14 ,$15)',
+                                                    [game.apiID, game.categories, game.description, game.designers, game.image, game.isLent, game.maxPlayers,
                                                     game.maxPlaytime, game.minPlayers, game.minPlaytime,
                                                     game.name, game.suggestedAge, game.thumbnail,
-                                                    game.yearPublished],
+                                                    game.yearPublished, game.publishers],
                                                     function(err, result) {
                                                       done();
 
@@ -130,12 +130,12 @@ router.post('/to-wish-list', function(req, res) {
 
                                       client.query( 'INSERT INTO wish_list (api_id, categories, description, designers, image, is_lent,'
                                                     + ' maxplayers, maxplaytime, minplayers, minplaytime, '
-                                                    + 'gamename, suggested_age, thumbnail, yearpublished)' +
-                                                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
-                                                    [game.apiID, game.category, game.description, game.designer, game.image, game.isLent, game.maxPlayers,
+                                                    + 'gamename, suggested_age, thumbnail, yearpublished, publishers)' +
+                                                    ' values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)',
+                                                    [game.apiID, game.categories, game.description, game.designers, game.image, game.isLent, game.maxPlayers,
                                                     game.maxPlaytime, game.minPlayers, game.minPlaytime,
                                                     game.name, game.suggestedAge, game.thumbnail,
-                                                    game.yearPublished],
+                                                    game.yearPublished, game.publishers],
                                                     function(err, result) {
                                                       done();
 
@@ -176,7 +176,29 @@ router.post('/to-wish-list', function(req, res) {
 //     gamename varchar(100),
 //     suggested_age varchar(100),
 //     thumbnail varchar(100),
-//     yearpublished varchar(100)
+//     yearpublished varchar(100),
+//     publishers varchar(100)[],
+//     person_lent varchar(100),
+//     date_lent timestamp,
+// );
+
+// CREATE TABLE wish_list (
+//     id SERIAL PRIMARY KEY,
+//     categories varchar(100)[],
+//     description text,
+//     designers varchar(100)[],
+//     image varchar(100),
+//     is_lent boolean,
+//     api_id varchar(100),
+//     maxplayers varchar(100),
+//     maxplaytime varchar(100),
+//     minplayers varchar(100),
+//     minplaytime varchar(100),
+//     gamename varchar(100),
+//     suggested_age varchar(100),
+//     thumbnail varchar(100),
+//     yearpublished varchar(100),
+//     publishers varchar(100)[]
 // );
 
 // CREATE TABLE game_ids (
