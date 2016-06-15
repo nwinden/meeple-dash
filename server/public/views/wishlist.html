@@ -1,6 +1,6 @@
 <section ng-init="getWishlist()">
 
-  <h2>Dashboard</h2>
+  <h2>Wish List</h2>
 
   <table st-table="games" st-safe-src="boardgames">
     <thead>
@@ -40,12 +40,29 @@
 
 </section>
 
-<modal-dialog show='myData.modalShown' width='800px' dialog-title={{modalGame.gamename}}>
+<modal-dialog show='modal.info' width='800px' dialog-title={{modalGame.gamename}}>
   <img ng-src="{{modalGame.image}}"/>
+  <p>Suggested Age: {{modalGame.suggestedAge}}</p>
   <p>Year Published: {{modalGame.yearpublished}}</p>
   <p>Designers(s):</p>
   <p ng-repeat="designer in modalGame.designers">{{designer}}</p>
   <p>Categories:</p>
   <p ng-repeat="category in modalGame.categories">{{category}}</p>
   <p>{{modalGame.description}}</p>
+</modal-dialog>
+
+<modal-dialog show='modal.delete' width='300px' height='100px'>
+  <p>Are you sure you wish to delete this game from your wishlist?</p>
+  <button ng-click='delete()'>Yes</button>
+  <button ng-click='modal.delete = false'>No</button>
+</modal-dialog>
+
+<modal-dialog show='modal.collection' width='300px' height='100px'>
+  <p>Are you sure you wish to add this game to your collection?</p>
+  <button ng-click='toCollection()'>Yes</button>
+  <button ng-click='modal.collection = false'>No</button>
+</modal-dialog>
+
+<modal-dialog show='modal.success' width='300px' height='75px'>
+  <p>{{modal.successText}}</p>
 </modal-dialog>

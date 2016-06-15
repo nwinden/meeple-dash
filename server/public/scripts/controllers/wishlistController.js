@@ -4,12 +4,18 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   $scope.boardgames = [];
 
+  $scope.modal = {info:false,
+                  delete:false,
+                  deleteID:'',
+                  collection:false,
+                  addedGame:{},
+                  success:false,
+                  successText:''};
+
   $scope.getWishlist = function() {
 
     $http.get('/wishlist').then(
       function(response) {
-
-        console.log(response.data);
 
         $scope.boardgames = response.data;
 
@@ -19,12 +25,27 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   }
 
+
   $scope.deleteGame = function(id) {
 
-    $http.delete('/wishlist/' + id).then(
+    $scope.modal.delete = !$scope.modal.delete;
+    $scope.modal.deleteID = id;
+
+  }
+
+  $scope.delete = function() {
+
+    $scope.modal.delete = !$scope.modal.delete;
+
+    $http.delete('/wishlist/' + $scope.modal.deleteID).then(
       function(response) {
 
         $scope.getWishlist();
+
+        if (response.status == 200) {
+          $scope.modal.successText= 'successfully deleted from your wish list.'
+          $scope.modal.success = !$scope.modal.success;
+        }
 
       }
 
@@ -34,10 +55,24 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   $scope.addToCollection = function(game) {
 
+    $scope.modal.collection = !$scope.modal.collection;
+    $scope.modal.addedGame = game
+
     game.location = 'collection';
 
-    $http.post('/wishlist', game).then(
+  }
+
+  $scope.toCollection = function () {
+
+    $scope.modal.collection = !$scope.modal.collection;
+
+    $http.post('/wishlist', $scope.modal.addedGame).then(
       function(response) {
+
+        if (response.status == 200) {
+          $scope.modal.successText= 'successfully added ' + response.config.data.gamename + ' to your collection.'
+          $scope.modal.success = !$scope.modal.success;
+        }
 
         $scope.getWishlist();
 
@@ -47,10 +82,8 @@ boardApp.controller('WishlistController', ['$scope', '$http', function($scope, $
 
   }
 
-  $scope.myData = { modalShown: false };
-
   $scope.toggleInfo = function(game) {
-    $scope.myData.modalShown = !$scope.myData.modalShown;
+    $scope.modal.info = !$scope.modal.info;
     $scope.modalGame = game;
   };
 
