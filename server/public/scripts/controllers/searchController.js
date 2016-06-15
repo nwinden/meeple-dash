@@ -91,6 +91,13 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   }
 
+  $scope.myData = { modalShown: false };
+
+  $scope.toggleInfo = function(game) {
+    $scope.myData.modalShown = !$scope.myData.modalShown;
+    $scope.modalGame = game;
+  };
+
 }]);
 
 function turnXML(xml) {
