@@ -33,32 +33,17 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
           $http.get('/search/get-games/' + ids).then(
             function(response) {
 
-              $scope.boardgames = Array.isArray(turnXML(response.data).boardgames.boardgame) ? turnXML(response.data).boardgames.boardgame : [turnXML(response.data).boardgames.boardgame];
+              games = Array.isArray(turnXML(response.data).boardgames.boardgame) ? turnXML(response.data).boardgames.boardgame : [turnXML(response.data).boardgames.boardgame];
 
-              console.log($scope.boardgames);
+              for (var i = 0; i < games.length; i++) {
 
-              for (var i = 0; i < $scope.boardgames.length; i++) {
-                if (Array.isArray($scope.boardgames[i].name)) {
-                  for (var j = 0; j < $scope.boardgames[i].name.length ; j++) {
-                    if ($scope.boardgames[i].name[j]._primary) {
-                      $scope.boardgames[i].gamename = $scope.boardgames[i].name[j].__text;
-                    }
-                  }
-                } else {
-                  $scope.boardgames[i].gamename = $scope.boardgames[i].name.__text;
-                }
-
-                // $scope.boardgames[i].minplaytime = $scope.boardgames[i].minplaytime != 0 ? ($scope.boardgames[i].minplaytime / 60).toFixed(1) : $scope.boardgames[i].minplaytime;
-                //
-                // $scope.boardgames[i].maxplaytime = $scope.boardgames[i].maxplaytime != 0 ? ($scope.boardgames[i].maxplaytime / 60).toFixed(1) : $scope.boardgames[i].maxplaytime;
-
-                if ($scope.boardgames[i].thumbnail) {
-                  $scope.boardgames[i].thumbnail = $scope.boardgames[i].thumbnail;
-                } else {
-                  $scope.boardgames[i].thumbnail = '/assets/images/img_not_available.png';
-                }
+                games[i] = new Boardgame(games[i]);
 
               }
+
+              $scope.boardgames = games;
+
+              console.log($scope.boardgames);
 
             }
 
@@ -74,11 +59,9 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   $scope.addToCollection = function(game) {
 
-    var newGame = new Boardgame(game);
-    newGame.dbstored = 'collection';
-    console.log(newGame);
+    game.dbstored = 'collection';
 
-    $http.post('/search/to-collection', newGame).then(function(response) {
+    $http.post('/search/to-collection', game).then(function(response) {
 
       console.log(response);
 
@@ -94,11 +77,9 @@ boardApp.controller('SearchController', ['$scope', '$http', function($scope, $ht
 
   $scope.addToWishList = function(game) {
 
-    var newGame = new Boardgame(game);
-    newGame.dbstored = 'wish list';
-    console.log(newGame);
+    game.dbstored = 'wish list';
 
-    $http.post('/search/to-wish-list', newGame).then(function(response) {
+    $http.post('/search/to-wish-list', game).then(function(response) {
 
       if (response.status == 200) {
         alert('You already have that game in your ' + response.data[0].location + '!');

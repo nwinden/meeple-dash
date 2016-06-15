@@ -17,11 +17,11 @@
     </tr>
     <tr>
       <th>Image</th>
-      <th st-sort="gamename" >Game</th>
-      <th st-sort="minplayers" >Min Players</th>
-      <th st-sort="maxplayers" >Max Players</th>
-      <th st-sort="minplaytime" >Min Time(hours)</th>
-      <th st-sort="maxplaytime" >Max Time(hours)</th>
+      <th st-sort="name" >Game</th>
+      <th st-sort="minPlayers" >Min Players</th>
+      <th st-sort="maxPlayers" >Max Players</th>
+      <th st-sort="minPlaytime" >Min Time(hours)</th>
+      <th st-sort="maxPlaytime" >Max Time(hours)</th>
       <th></th>
     </tr>
     </thead>
@@ -31,19 +31,18 @@
       </tr>
     </tbody>
     <tbody ng-repeat="boardgame in games">
-    <tr>
-      <td><img ng-src={{boardgame.thumbnail}} /></td>
-      <td>{{boardgame.gamename}}</td>
-      <td>{{boardgame.minplayers}}</td>
-      <td>{{boardgame.maxplayers}}</td>
-      <td>{{boardgame.minplaytime}}</td>
-      <td>{{boardgame.maxplaytime}}</td>
-      <td>
-        <button ng-click="addToCollection(boardgame)">Add to Collection</button>
-        <button ng-click="addToWishList(boardgame)">Add to Wish List</button>
-      </td>
-    </tr>
-    </div>
+      <tr>
+        <td><img ng-src={{boardgame.thumbnail}} /></td>
+        <td>{{boardgame.name}}</td>
+        <td>{{boardgame.minPlayers}}</td>
+        <td>{{boardgame.maxPlayers}}</td>
+        <td>{{boardgame.minPlaytime}}</td>
+        <td>{{boardgame.maxPlaytime}}</td>
+        <td>
+          <button ng-click="addToCollection(boardgame)">Add to Collection</button>
+          <button ng-click="addToWishList(boardgame)">Add to Wish List</button>
+        </td>
+      </tr>
     </tbody>
   </table>
 

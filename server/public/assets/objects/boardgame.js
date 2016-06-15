@@ -94,39 +94,32 @@ function Boardgame(game) {
 
   this.isLent = false;
 
-  if (game.maxplayers != 0) {
-    this.maxPlayers = game.maxplayers;
+
+  this.maxPlayers = Number(game.maxplayers);
+
+  this.maxPlaytime = Number(game.maxplaytime);
+
+  this.minPlayers = Number(game.minplayers);
+
+  this.minPlaytime = Number(game.minplaytime);
+
+  if (Array.isArray(game.name)) {
+    for (var i = 0; i < game.name.length ; i++) {
+      if (game.name[i]._primary) {
+        this.name = game.name[i].__text;
+      }
+    }
   } else {
-    this.maxPlayers = 'Not Provided';
+    this.name = game.name.__text;
   }
 
-  if (game.maxplaytime != 0) {
-    this.maxPlaytime = game.maxplaytime
-  } else {
-    this.maxPlaytime = 'Not Provided';
-  }
-
-  if (game.minplayers != 0) {
-    this.minPlayers = game.minplayers;
-  } else {
-    this.minPlayers = 'Not Provided';
-  }
-
-  if (game.minplaytime != 0) {
-    this.minPlaytime = game.minplaytime;
-  } else {
-    this.minPlaytime = 'Not Provided';
-  }
-
-  this.name = game.gamename;
+  this.thumbnail = game.thumbnail ? game.thumbnail : '/assets/images/img_not_available.png';
 
   if (game.age != 0) {
     this.suggestedAge = game.age;
   } else {
     this.suggestedAge = 'Not Provided';
   }
-
-  this.thumbnail = game.thumbnail;
 
   if (game.yearpublished != 0) {
     this.yearPublished = game.yearpublished;
