@@ -67,8 +67,8 @@ router.put('/lend', function (req, res) {
     if (err) {
       res.sendStatus(500);
     }
-    client.query('UPDATE dash_collection SET is_lent = $1 WHERE api_id = $2',
-      [req.body.is_lent, req.body.api_id],
+    client.query('UPDATE dash_collection SET is_lent = $1, person_lent = $2, date_lent = $3 WHERE api_id = $4',
+      [req.body.is_lent, req.body.person_lent, req.body.date_lent, req.body.api_id],
       function(err, result){
         done();
         if (err) {
@@ -86,8 +86,27 @@ router.put('/return', function (req, res) {
     if (err) {
       res.sendStatus(500);
     }
-    client.query('UPDATE dash_collection SET is_lent = $1 WHERE api_id = $2',
-      [req.body.is_lent, req.body.api_id],
+    client.query('UPDATE dash_collection SET is_lent = $1, person_lent = $2, date_lent = $3 WHERE api_id = $4',
+      [req.body.is_lent, req.body.person_lent, req.body.date_lent, req.body.api_id],
+      function(err, result){
+        done();
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+          return;
+        }
+        res.sendStatus(200);
+      })
+  });
+});
+
+router.put('/update', function (req, res) {
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
+      res.sendStatus(500);
+    }
+    client.query('UPDATE dash_collection SET maxplayers = $1, maxplaytime = $2, minplayers = $3, minplaytime = $4 WHERE api_id = $5',
+      [req.body.maxplayers, req.body.maxplaytime, req.body.minplayers, req.body.minplaytime, req.body.api_id],
       function(err, result){
         done();
         if (err) {

@@ -34,7 +34,7 @@
       <tr ng-if="boardgame.is_lent">
         <td><img ng-src={{boardgame.thumbnail}} ng-click="toggleInfo(boardgame)" /></td>
         <td>{{boardgame.gamename}}</td>
-        <td colspan="4">This Game is Lent Out</td>
+        <td colspan="4">This game is lent out to {{boardgame.person_lent}} since {{boardgame.date_lent | date}}.</td>
         <td>
           <button ng-click="returnGame(boardgame)">Return Game</button>
           <button ng-click="deleteGame(boardgame)">Remove</button>
@@ -43,29 +43,33 @@
       <tr ng-if="!boardgame.is_lent">
   		  <td><img ng-src={{boardgame.thumbnail}} ng-click="toggleInfo(boardgame)" /></td>
     		<td>{{boardgame.gamename}}</td>
-    		<td>{{boardgame.minplayers}}</td>
-    		<td>{{boardgame.maxplayers}}</td>
-    		<td>{{boardgame.minplaytime}}</td>
-        <td>{{boardgame.maxplaytime}}</td>
+        <form ng-model="boardgame">
+          <td><input type="number" ng-value={{boardgame.minplayers}} ng-model="boardgame.minplayers"></td>
+          <td><input type="number" ng-value={{boardgame.maxplayers}} ng-model="boardgame.maxplayers"></td>
+          <td><input type="number" ng-value={{boardgame.minplaytime}} ng-model="boardgame.minplaytime"></td>
+          <td><input type="number" ng-value={{boardgame.maxplaytime}} ng-model="boardgame.maxplaytime"></td>
+        </form>
         <td>
           <button ng-click="lendGame(boardgame)">Lend Game</button>
           <button ng-click="deleteGame(boardgame)">Remove</button>
+          <button ng-click="updateGame(boardgame)">Update</button>
         </td>
+
   	  </tr>
   	</tbody>
   </table>
 
 </section>
 
-<modal-dialog show='modal.info' width='800px' dialog-title={{modalGame.gamename}}>
-  <img ng-src="{{modalGame.image}}"/>
-  <p>Suggested Age: {{modalGame.suggested_age}}</p>
-  <p>Year Published: {{modalGame.yearpublished}}</p>
+<modal-dialog show='modal.info' width='800px' dialog-title={{modal.modalGame.gamename}}>
+  <img ng-src="{{modal.modalGame.image}}"/>
+  <p>Suggested Age: {{modal.modalGame.suggested_age}}</p>
+  <p>Year Published: {{modal.modalGame.yearpublished}}</p>
   <p>Designer(s):</p>
-  <p ng-repeat="designer in modalGame.designers">{{designer}}</p>
+  <p ng-repeat="designer in modal.modalGame.designers">{{designer}}</p>
   <p>Categories:</p>
-  <p ng-repeat="category in modalGame.categories">{{category}}</p>
-  <p>{{modalGame.description}}</p>
+  <p ng-repeat="category in modal.modalGame.categories">{{category}}</p>
+  <p>{{modal.modalGame.description}}</p>
 </modal-dialog>
 
 <modal-dialog show='modal.delete' width='310px' height='150px' dialog-title={{modal.modalGame.gamename.substring(0,20)}}>
@@ -74,6 +78,26 @@
   <button ng-click='modal.delete = false'>No</button>
 </modal-dialog>
 
+<modal-dialog show='modal.lend' width='310px' height='150px' dialog-title={{modal.modalGame.gamename.substring(0,20)}}>
+  <p>Who are you lending this to?</p>
+  <form ng-submit="lendOutGame(personLent)">
+  <label for="person">Game Recipient:</label>
+  <input type="text" name="person" ng-model="personLent">
+  <button>Lend Out</button>
+  </form>
+</modal-dialog>
+
+<modal-dialog show='modal.return' width='310px' height='150px' dialog-title={{modal.modalGame.gamename.substring(0,20)}}>
+  <p>Are you sure you this game was returned to your collection?</p>
+  <button ng-click='gameReturned()'>Yes</button>
+  <button ng-click='modal.return = false'>No</button>
+</modal-dialog>
+
+<modal-dialog show='modal.update' width='310px' height='150px' dialog-title={{modal.modalGame.gamename.substring(0,20)}}>
+  <p>Are you sure you wish to update this game?</p>
+  <button ng-click='update()'>Yes</button>
+  <button ng-click='modal.update = false'>No</button>
+</modal-dialog>
 
 <modal-dialog show='modal.success' width='310px' height='100px' dialog-title={{modal.modalGame.gamename.substring(0,20)}}>
   <p>{{modal.successText}}</p>
