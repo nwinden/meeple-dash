@@ -4,17 +4,21 @@ function Boardgame(game) {
 
   this.categories = [];
 
-  if (Array.isArray(game.boardgamecategory)) {
+  if (game.boardgamecategory) {
 
-    for (var i = 0; i < game.boardgamecategory.length; i++) {
+    if (Array.isArray(game.boardgamecategory)) {
 
-      this.categories.push(game.boardgamecategory[i].__text);
+      for (var i = 0; i < game.boardgamecategory.length; i++) {
+
+        this.categories.push(game.boardgamecategory[i].__text);
+
+      }
+
+    } else {
+
+      this.categories.push(game.boardgamecategory.__text);
 
     }
-
-  } else {
-
-    this.categories.push(game.boardgamecategory.__text);
 
   }
 

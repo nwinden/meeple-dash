@@ -2,21 +2,33 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
+header{
+  margin: -8px -8px 0 -11px;
+  background-color: dimgrey;
   text-align: center;
-  background-color: royalblue;
-  margin-left: -8px;
-  margin-right: -8px;
-  margin-top: -8px;
-  height: 75px;
-  padding-top: 25px;
-  color: white;
+  height: 50px;
+  padding: 25px;
+  box-shadow: 2px 2px 2px black;
+}
+
+h1 {
+  font-style: italic;
+  text-shadow: 2px 5px 2px black;
+  color: #ddd;
+}
+
+h2 {
+  text-align: center;
+}
+
+h6 {
+  text-align: center;
 }
 
 .navbar {
-  width: 425px;
-  margin: auto;
-  border-bottom: 3px solid royalblue;
+  width: 338px;
+  margin: 10px auto;
+  border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
 
@@ -28,48 +40,28 @@ h1 {
 
 .nav a {
   text-decoration: none;
-  color: royalblue;
+  color: black;
   margin:10px;
-  border-left: 2px solid royalblue;
-  padding-left: 20px;
   padding-bottom: 15px;
 }
 
 .nav a:hover {
-  color: lawngreen;
+  color: orangered;
 }
 
 .nav a:active {
   color: orangered;
 }
 
-main {
-  text-align: center;
-}
-
-h6 {
-  text-align: center;
-}
-
-.pet p {
-  display: inline-block;
-}
-
-.favorite p {
-  display: block;
-}
-
-.collection, .searchedGame {
-  margin: 10px auto;
-  border: 3px solid royalblue;
-  padding: 10px;
-  height: auto;
-  width: 600px;
-  box-shadow: 3px 3px 5px 1px black;
+table {
+  border-collapse: collapse;
+  padding: 5px;
+  width: auto;
+  margin: auto;
 }
 
 table th, table td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid black;
   padding: 0 20px;
 }
 
@@ -80,18 +72,40 @@ table th {
 
 table td {
   height: 175px;
+  text-align: center;
 }
 
-table {
-  border-collapse: collapse;
-  padding: 5px;
-  width: auto;
-  margin: auto;
+td img {
+  padding: auto;
 }
 
-/*table tr:nth-child(odd) {
-  background-color: #f1f1f1;
+td input {
+  border: none;
+  width:40px;
+  text-align: center;
 }
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}*/
+
+.modalButton{
+  text-align: center;
+}
+
+.gameInfoTop{
+  height: auto;
+}
+
+.gameImage {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+div img {
+  height: auto;
+  width: 450px;
+  padding:10px;
+  border-right: 1px solid black;
+}
+
+.gameInfo {
+  display: inline-block;
+  padding:0 0 0 10px;
+}

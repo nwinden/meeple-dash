@@ -13,15 +13,16 @@
   <table st-table="games" st-safe-src="boardgames">
     <thead>
     <tr>
-      <th colspan="7"><input st-search="" placeholder="Search through results" type="text"/></th>
+      <th colspan="4"><input st-search="" placeholder="Search through results" type="text"/></th>
+      <th colspan="3"></th>
     </tr>
     <tr>
       <th>Image</th>
       <th st-sort="name" >Game</th>
       <th st-sort="minPlayers" >Min Players</th>
       <th st-sort="maxPlayers" >Max Players</th>
-      <th st-sort="minPlaytime" >Min Time(hours)</th>
-      <th st-sort="maxPlaytime" >Max Time(hours)</th>
+      <th st-sort="minPlaytime" >Min Time</th>
+      <th st-sort="maxPlaytime" >Max Time</th>
       <th></th>
     </tr>
     </thead>
@@ -49,27 +50,41 @@
 
 </section>
 
-<modal-dialog show='modal.info' width='800px' dialog-title={{modal.modalGame.name}}>
-  <img ng-src="{{modal.modalGame.image}}"/>
-  <p>Suggested Age: {{modal.modalGame.suggestedAge}}</p>
-  <p>Year Published: {{modal.modalGame.yearPublished}}</p>
-  <p>Designer(s):</p>
-  <p ng-repeat="designer in modal.modalGame.designers">{{designer}}</p>
-  <p>Categories:</p>
-  <p ng-repeat="category in modal.modalGame.categories">{{category}}</p>
+<modal-dialog show='modal.info' width='750px' dialog-title={{modal.modalGame.gamename}}>
+  <div class="gameInfoTop">
+    <div class="gameImage">
+      <img ng-src="{{modal.modalGame.image}}"/>
+    </div>
+    <div class="gameInfo">
+      <p>Designer(s):</p>
+      <ul>
+        <li ng-repeat="designer in modal.modalGame.designers">{{designer}}</li>
+      </ul>
+      <p>Year Published: {{modal.modalGame.yearPublished}}</p>
+      <p>Suggested Age: {{modal.modalGame.suggestedAge}}</p>
+      <p>Categories:</p>
+      <ul>
+        <li ng-repeat="category in modal.modalGame.categories">{{category}}</li>
+      </ul>
+    </div>
+  </div>
   <p>{{modal.modalGame.description}}</p>
 </modal-dialog>
 
 <modal-dialog show='modal.collection' width='310px' height='150px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>Are you sure you wish to add this game to your collection?</p>
+  <div class="modalButton">
   <button ng-click='toCollection()'>Yes</button>
   <button ng-click='modal.collection = false'>No</button>
+  </div>
 </modal-dialog>
 
 <modal-dialog show='modal.wishlist' width='310px' height='150px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
   <p>Are you sure you wish to add this game to your wish list?</p>
+  <div class="modalButton">
   <button ng-click='toWishList()'>Yes</button>
   <button ng-click='modal.wishlist = false'>No</button>
+  </div>
 </modal-dialog>
 
 <modal-dialog show='modal.duplicate' width='350px' height='100px' dialog-title={{modal.modalGame.name.substring(0,20)}}>
